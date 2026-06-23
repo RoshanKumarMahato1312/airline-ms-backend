@@ -6,7 +6,10 @@ const router = express.Router();
 
 router.use(protect);
 
-router.get('/me', userController.getProfile);
+router.route('/me')
+  .get(userController.getProfile)
+  .patch(userController.updateProfile)
+  .put(userController.updateProfile);
 router.get('/', authorizeRoles('admin'), userController.getAllUsers);
 router.route('/:id')
   .get(authorizeRoles('admin'), userController.getUser)

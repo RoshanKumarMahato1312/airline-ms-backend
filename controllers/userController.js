@@ -34,3 +34,20 @@ exports.deleteUser = asyncHandler(async (req, res) => {
   }
   res.json({ success: true, message: 'User deleted' });
 });
+
+exports.updateProfile = asyncHandler(async (req, res) => {
+  const { name, email, phone, profileImage } = req.body;
+  const updateData = {};
+  if (name !== undefined) updateData.name = name;
+  if (email !== undefined) updateData.email = email;
+  if (phone !== undefined) updateData.phone = phone;
+  if (profileImage !== undefined) updateData.profileImage = profileImage;
+
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    updateData,
+    { new: true, runValidators: true }
+  );
+
+  res.json({ success: true, data: user });
+});

@@ -9,6 +9,7 @@ const bookingSchema = new mongoose.Schema(
     totalAmount: { type: Number, required: true, min: 0 },
     bookingStatus: { type: String, enum: ['Confirmed', 'Pending', 'Cancelled'], default: 'Pending' },
     paymentStatus: { type: String, enum: ['Success', 'Pending', 'Failed'], default: 'Pending' },
+    boardingStatus: { type: String, enum: ['not-boarded', 'checked-in', 'boarded'], default: 'not-boarded' },
     ticketId: { type: String, unique: true, sparse: true },
     qrCode: { type: String, default: '' }
   },
